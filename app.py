@@ -1,18 +1,25 @@
+# pip install flask-debugtoolbar
 from flask import Flask, abort
 from config import Config
-from errors.views import error_bp
 import errors
-
+from extensions import toolbar
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(obj=Config)
 
+    if app.debug:
+        toolbar.init_app(app)
+
     errors.init_app(app)
     
     @app.route('/')
     def index():
-        return 'olá mundo'
+        return '''
+            <body>
+                <h1>Olá Mundo!</h1> 
+            </body>
+        '''
 
 
     @app.route('/erro')
