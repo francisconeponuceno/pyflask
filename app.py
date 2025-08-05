@@ -1,22 +1,23 @@
 from flask import Flask, abort
 from config import Config
-from erros.views import error_bp
+from errors.views import error_bp
+import errors
+
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(obj=Config)
 
-    app.register_blueprint(blueprint=error_bp)
-    
+    errors.init_app(app)
     
     @app.route('/')
     def index():
         return 'olá mundo'
 
 
-    @app.route('erro')
-    def erro_page():
-        abort(code=404)
+    @app.route('/erro')
+    def error_page():
+        abort(code=500)
         return 'Bem dindo'
     
     
