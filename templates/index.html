@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário</title>
+</head>
+<body>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+
+        {{ form.nome.label }} <br>
+        {{ form.nome() }}
+        
+        <hr>
+
+        {{ form.idade.label }} <br>
+        {{ form.idade }}
+
+        {{ form.aceita_termos.label }} <br>
+        {{ form.aceita_termos() }}
+
+        <hr>
+
+        {{ form.senha.label }} <br>
+        {{ form.senha() }}
+
+        <hr>
+
+        {{ form.comentario.label }} <br>
+        {{ form.comentario() }}
+
+        <hr>
+
+        {{ form.enviar }} <br>
+
+        <hr>
+
+    </form>
+
+    <h1>Dados Recebidos</h1> <br>
+
+    <ul>
+        {% for chave, valor in dados.items() %}
+        <li><strong>{{ chave }}:</strong>{{ valor }}</li>
+        {% endfor %}
+    </ul>
+
+
+</body>
+</html>
