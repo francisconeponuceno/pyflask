@@ -1,11 +1,20 @@
+<<<<<<< HEAD
 from flask import Flask, redirect, render_template,request
 from config import Config
 from extenssions import toolbar, csrf
 from forms import CamposForm
+=======
+# pip install flask-debugtoolbar
+from flask import Flask, abort
+from config import Config
+import errors
+from extensions import toolbar
+>>>>>>> 9d5ee9a48893bea55668029a91f3e3f729f3f050
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(obj=Config)
+<<<<<<< HEAD
     
     if app.debug:
         toolbar.init_app(app)
@@ -31,6 +40,27 @@ def create_app():
             form = form,
             dados=dados,
         )
+=======
+>>>>>>> 9d5ee9a48893bea55668029a91f3e3f729f3f050
 
-    # Extenção
+    if app.debug:
+        toolbar.init_app(app)
+
+    errors.init_app(app)
+    
+    @app.route('/')
+    def index():
+        return '''
+            <body>
+                <h1>Olá Mundo!</h1> 
+            </body>
+        '''
+
+
+    @app.route('/erro')
+    def error_page():
+        abort(code=500)
+        return 'Bem dindo'
+    
+    
     return app
